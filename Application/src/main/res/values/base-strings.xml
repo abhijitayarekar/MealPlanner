@@ -16,13 +16,12 @@
 -->
 
 <resources>
-    <string name="app_name">Navigation Drawer</string>
+    <string name="app_name">Meal Planner</string>
     <string name="intro_message">
         <![CDATA[
         
             
-             This example illustrates a common usage of the DrawerLayout widget in the Android
-             support library.
+             Add family members and plan weekly/monthly meals for all or each member.
             
         
         ]]>

@@ -65,14 +65,14 @@ import java.util.Locale;
  * An action should be an operation performed on the current contents of the window,
  * for example enabling or disabling a data overlay on top of the current content.</p>
  */
-public class NavigationDrawerActivity extends Activity implements PlanetAdapter.OnItemClickListener {
+public class NavigationDrawerActivity extends Activity implements UserAdapter.OnItemClickListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mPlanetTitles;
+    private String[] mUserTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         setContentView(R.layout.activity_navigation_drawer);
 
         mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mUserTitles = getResources().getStringArray(R.array.users_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
 
@@ -90,7 +90,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         mDrawerList.setHasFixedSize(true);
 
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new PlanetAdapter(mPlanetTitles, this));
+        mDrawerList.setAdapter(new UserAdapter(mUserTitles, this));
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -171,7 +171,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = PlanetFragment.newInstance(position);
+        Fragment fragment = UserFragment.newInstance(position);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -179,7 +179,7 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         ft.commit();
 
         // update selected item title, then close the drawer
-        setTitle(mPlanetTitles[position]);
+        setTitle(mUserTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
@@ -211,17 +211,17 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */
-    public static class PlanetFragment extends Fragment {
-        public static final String ARG_PLANET_NUMBER = "planet_number";
+    public static class UserFragment extends Fragment {
+        public static final String ARG_USER_NUMBER = "user_number";
 
-        public PlanetFragment() {
+        public UserFragment() {
             // Empty constructor required for fragment subclasses
         }
 
         public static Fragment newInstance(int position) {
-            Fragment fragment = new PlanetFragment();
+            Fragment fragment = new UserFragment();
             Bundle args = new Bundle();
-            args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+            args.putInt(UserFragment.ARG_USER_NUMBER, position);
             fragment.setArguments(args);
             return fragment;
         }
@@ -229,16 +229,16 @@ public class NavigationDrawerActivity extends Activity implements PlanetAdapter.
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
-            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String planet = getResources().getStringArray(R.array.planets_array)[i];
+            View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+            int i = getArguments().getInt(ARG_USER_NUMBER);
+            String user = getResources().getStringArray(R.array.users_array)[i];
 
-            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
+            int imageId = getResources().getIdentifier(user.toLowerCase(Locale.getDefault()),
                     "drawable", getActivity().getPackageName());
             ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
             iv.setImageResource(imageId);
 
-            getActivity().setTitle(planet);
+            getActivity().setTitle(user);
             return rootView;
         }
     }
