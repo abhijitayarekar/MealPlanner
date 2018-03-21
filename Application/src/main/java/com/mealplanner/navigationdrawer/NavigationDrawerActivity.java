@@ -33,10 +33,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.util.Locale;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
@@ -229,15 +226,15 @@ public class NavigationDrawerActivity extends Activity implements UserAdapter.On
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_meal, container, false);
             int i = getArguments().getInt(ARG_USER_NUMBER);
             String user = getResources().getStringArray(R.array.users_array)[i];
-
+/*
             int imageId = getResources().getIdentifier(user.toLowerCase(Locale.getDefault()),
                     "drawable", getActivity().getPackageName());
             ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
             iv.setImageResource(imageId);
-
+*/
             getActivity().setTitle(user);
             return rootView;
         }
