@@ -15,7 +15,7 @@
 */
 package com.mealplanner.navigationdrawer.tests;
 
-import com.mealplanner.navigationdrawer.*;
+import com.mealplanner.ui.NavigationDrawerActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 

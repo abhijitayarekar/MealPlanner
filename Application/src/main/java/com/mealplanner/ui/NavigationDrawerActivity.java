@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mealplanner.navigationdrawer;
+package com.mealplanner.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -34,6 +34,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.mealplanner.data.MealPlan;
+import com.mealplanner.data.User;
+import com.mealplanner.navigationdrawer.R;
+
+import java.util.ListIterator;
 
 /**
  * This example illustrates a common usage of the DrawerLayout widget
@@ -70,6 +76,7 @@ public class NavigationDrawerActivity extends Activity implements UserAdapter.On
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mUserTitles;
+    private MealPlan mMealPlan = MealPlan.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +84,11 @@ public class NavigationDrawerActivity extends Activity implements UserAdapter.On
         setContentView(R.layout.activity_navigation_drawer);
 
         mTitle = mDrawerTitle = getTitle();
-        mUserTitles = getResources().getStringArray(R.array.users_array);
+        //mUserTitles = getResources().getStringArray(R.array.users_array);
+        mUserTitles = new String[mMealPlan.mUsers.size()];
+        for(int i=0;i<mUserTitles.length;i++) {
+            mUserTitles[i] = new String(mMealPlan.mUsers.get(i).mName);
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer);
 
@@ -229,12 +240,6 @@ public class NavigationDrawerActivity extends Activity implements UserAdapter.On
             View rootView = inflater.inflate(R.layout.fragment_meal, container, false);
             int i = getArguments().getInt(ARG_USER_NUMBER);
             String user = getResources().getStringArray(R.array.users_array)[i];
-/*
-            int imageId = getResources().getIdentifier(user.toLowerCase(Locale.getDefault()),
-                    "drawable", getActivity().getPackageName());
-            ImageView iv = ((ImageView) rootView.findViewById(R.id.image));
-            iv.setImageResource(imageId);
-*/
             getActivity().setTitle(user);
             return rootView;
         }

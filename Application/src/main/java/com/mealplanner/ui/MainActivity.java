@@ -15,7 +15,7 @@
 */
 
 
-package com.mealplanner.navigationdrawer;
+package com.mealplanner.ui;
 
 import android.app.Activity;
 import android.content.Intent;
